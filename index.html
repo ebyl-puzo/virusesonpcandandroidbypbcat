@@ -50,12 +50,6 @@
             border: 3px solid #00ffff;
         }
 
-        .avatar-text {
-            color: #00ffff;
-            margin-top: 10px;
-            font-size: 1.2rem;
-        }
-
         .links {
             text-align: center;
             margin: 30px 0;
@@ -103,7 +97,6 @@
     <div class="content">
         <div class="avatar-container">
             <img src="groupavatar.png" alt="Аватар группы" onerror="this.src='https://via.placeholder.com/200x200?text=PbCat'">
-            <div class="avatar-text">groupavatar.png</div>
         </div>
 
         <div class="links">
@@ -115,14 +108,12 @@
         </div>
 
         <div class="main-button">
-            <button onclick="goToMainPage()">ГЛАВНАЯ СТРАНИЦА »</button>
+            <button onclick="window.location.href='index.html'">ГЛАВНАЯ СТРАНИЦА »</button>
         </div>
     </div>
 
     <script>
-        function goToMainPage() {
-            window.location.href = 'main.html';
-        }
+        // Пусто
     </script>
 </body>
 </html>
