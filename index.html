@@ -27,6 +27,13 @@
             word-break: break-word;
         }
 
+        h2 {
+            color: white;
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+
         .content {
             flex-grow: 1;
             display: flex;
@@ -70,7 +77,7 @@
             margin: 20px 0 40px;
         }
 
-        button {
+        button, .menu-btn {
             background-color: #2196F3;
             border: none;
             color: white;
@@ -78,42 +85,161 @@
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
             transition: background-color 0.3s;
             box-shadow: 0 4px 8px rgba(33,150,243,0.3);
+            margin: 10px;
+            width: 80%;
+            max-width: 400px;
         }
 
-        button:hover {
+        button:hover, .menu-btn:hover {
             background-color: #1976D2;
+        }
+
+        .back-button {
+            background-color: #f44336;
+        }
+
+        .back-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .download-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .download-btn {
+            background-color: #4CAF50;
+            width: 80%;
+            max-width: 350px;
+        }
+
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+
+        .item-description {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Сайт группы Вирусы на ПК и Android by PbCat</h1>
-    
-    <div class="content">
-        <div class="avatar-container">
-            <img src="groupavatar.png" alt="Аватар группы" onerror="this.src='https://via.placeholder.com/200x200?text=PbCat'">
+    <!-- Главная страница (индекс) -->
+    <div id="mainPage" style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 100vh; width: 100%;">
+        <h1>Сайт группы Вирусы на ПК и Android by PbCat</h1>
+        
+        <div class="content">
+            <div class="avatar-container">
+                <img src="groupavatar.png" alt="Аватар группы" onerror="this.src='https://via.placeholder.com/200x200?text=PbCat'">
+            </div>
+
+            <div class="links">
+                <p>🔗 Ссылка на нашу группу в Telegram:<br>
+                <a href="https://t.me/virusesonpcandandroidbypbcat" target="_blank">https://t.me/virusesonpcandandroidbypbcat</a></p>
+                
+                <p>📺 Наш канал на YouTube:<br>
+                <a href="https://youtube.com/@pbcatvirustester" target="_blank">https://youtube.com/@pbcatvirustester</a></p>
+            </div>
+
+            <div class="main-button">
+                <button class="menu-btn" onclick="goToMenu()">ГЛАВНАЯ СТРАНИЦА »</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Меню страница -->
+    <div id="menuPage" style="display: none; width: 100%;">
+        <h2>Меню</h2>
+        
+        <div class="menu-container">
+            <button class="menu-btn" onclick="goToSketchwareFiles()">Файлы приложения Sketchware Pro</button>
+            <button class="menu-btn" onclick="alert('Скоро будет доступно')">Скачать различные виртуальные машины</button>
         </div>
 
-        <div class="links">
-            <p>🔗 Ссылка на нашу группу в Telegram:<br>
-            <a href="https://t.me/virusesonpcandandroidbypbcat" target="_blank">https://t.me/virusesonpcandandroidbypbcat</a></p>
+        <div style="margin-top: 50px;">
+            <button class="back-button menu-btn" onclick="goToMainFromMenu()">Назад</button>
+        </div>
+    </div>
+
+    <!-- Sketchware файлы страница -->
+    <div id="sketchwarePage" style="display: none; width: 100%;">
+        <h2>Файлы приложения Sketchware Pro</h2>
+        
+        <div class="menu-container">
+            <div class="download-item">
+                <button class="download-btn" onclick="downloadFile('sketchwarepro-v6_4_0.apk')">Sketchware Pro v6.4.0</button>
+                <div class="item-description">- Для андроид 7 и ниже, меньше функций</div>
+            </div>
             
-            <p>📺 Наш канал на YouTube:<br>
-            <a href="https://youtube.com/@pbcatvirustester" target="_blank">https://youtube.com/@pbcatvirustester</a></p>
+            <div class="download-item">
+                <button class="download-btn" onclick="downloadFile('sketchwarepro-v7_0_0.apk')">Sketchware Pro v7.0.0</button>
+                <div class="item-description">- Для андроид 8 и выше, больше функций</div>
+            </div>
         </div>
 
-        <div class="main-button">
-            <button onclick="window.location.href='index.html'">ГЛАВНАЯ СТРАНИЦА »</button>
+        <div style="margin-top: 50px;">
+            <button class="back-button menu-btn" onclick="goToMenuFromSketchware()">Назад</button>
         </div>
     </div>
 
     <script>
-        // Пусто
+        function goToMenu() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('menuPage').style.display = 'flex';
+            document.getElementById('menuPage').style.flexDirection = 'column';
+            document.getElementById('menuPage').style.minHeight = '100vh';
+        }
+        
+        function goToMainFromMenu() {
+            document.getElementById('menuPage').style.display = 'none';
+            document.getElementById('sketchwarePage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'flex';
+            document.getElementById('mainPage').style.flexDirection = 'column';
+            document.getElementById('mainPage').style.minHeight = '100vh';
+        }
+        
+        function goToSketchwareFiles() {
+            document.getElementById('menuPage').style.display = 'none';
+            document.getElementById('sketchwarePage').style.display = 'flex';
+            document.getElementById('sketchwarePage').style.flexDirection = 'column';
+            document.getElementById('sketchwarePage').style.minHeight = '100vh';
+        }
+        
+        function goToMenuFromSketchware() {
+            document.getElementById('sketchwarePage').style.display = 'none';
+            document.getElementById('menuPage').style.display = 'flex';
+            document.getElementById('menuPage').style.flexDirection = 'column';
+            document.getElementById('menuPage').style.minHeight = '100vh';
+        }
+        
+        function downloadFile(filename) {
+            var link = document.createElement('a');
+            link.href = filename;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert('Скачивание ' + filename + ' начато...');
+        }
     </script>
 </body>
-</html>
+    </html>
